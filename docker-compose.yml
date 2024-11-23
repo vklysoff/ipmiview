@@ -1,7 +1,26 @@
 version: '3'
 services:
     ipmiview:
-        container_name: ipmiview
-        image: sunfoxcz/ipmiview:latest
+        build: .
+        image: vklysoff/ipmiview:latest
+        environment:
+            #- SCREEN_RES=3250x1600x24
+            - SCREEN_RES=1920x1080x24
+            #- SCREEN_RES=1530x730x24
+            #- SCREEN_RES=1750x850x24
+            #- SCREEN_RES=1024x768x16
         ports:
-            - 8080:8080
+            - 127.0.0.1:8787:8080
+        volumes:
+            - /srv/pool/slow/someshit/Downloads/soft/images/OL8U7_x86_64-boot-uek.iso:/root/boot.img
+            #- /srv/pool/slow/someshit/Downloads/soft/images/OL7U9_x86_64-boot.iso:/root/boot.img
+            - ./persistent/management.properties:/opt/IPMIView/jre/conf/management/management.properties
+            - ./persistent/logging.properties:/opt/IPMIView/jre/conf/logging.properties
+            - ./persistent/net.properties:/opt/IPMIView/jre/conf/net.properties
+            - ./persistent/sound.properties:/opt/IPMIView/jre/conf/sound.properties
+            - ./persistent/psfontj2d.properties:/opt/IPMIView/jre/lib/psfontj2d.properties
+            - ./persistent/email.properties:/opt/IPMIView/email.properties
+            - ./persistent/timeout.properties:/opt/IPMIView/timeout.properties
+            - ./persistent/sort.properties:/opt/IPMIView/sort.properties
+            - ./persistent/account.properties:/opt/IPMIView/account.properties
+            - ./persistent/IPMIView.properties:/opt/IPMIView/IPMIView.properties
